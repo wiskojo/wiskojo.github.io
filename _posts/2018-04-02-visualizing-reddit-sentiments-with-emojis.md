@@ -76,14 +76,14 @@ We can do some preliminary data visualization to get a sense of some of the comm
 #### Visualize Top Predicted Emojis
 We may be interested in which emojis are most commonly predicted by our DeepMoji model for comments from across all the relevant subreddits.
 
-<iframe width="900" height="800" frameborder="0" scrolling="no" src="//plot.ly/~wiskojo/1.embed"></iframe>
+<iframe width="800" height="450" frameborder="0" scrolling="no" src="//plot.ly/~wiskojo/1.embed"></iframe>
 
 #### Visualize Per-Subreddit Emoji Distribution
 We may also be interested in the weighted and unweighted emoji distribution of each subreddit (the unweighted distribution is precisely the frequency of each emoji predicted by our DeepMoji model for all comments from that particular subreddit whereas the weighted distribution scales the frequency of the predicted emoji with the model's associated predictive confidence--the default configuration of this notebook will use the weighted distribution when conducting further analysis).
 
-<iframe width="900" height="800" frameborder="0" scrolling="no" src="//plot.ly/~wiskojo/3.embed"></iframe>
+<iframe width="800" height="450" frameborder="0" scrolling="no" src="//plot.ly/~wiskojo/3.embed"></iframe>
 
-<iframe width="900" height="800" frameborder="0" scrolling="no" src="//plot.ly/~wiskojo/5.embed"></iframe>
+<iframe width="800" height="450" frameborder="0" scrolling="no" src="//plot.ly/~wiskojo/5.embed"></iframe>
 
 ### Data Analysis and Results
 ***
@@ -98,12 +98,12 @@ Throughout the course of this study we will make a diverse display of sentiment 
 #### Construct Low Dimensional Embedding with PCA
 When it comes to dimensionality reduction, PCA is really the first approach that comes to mind; it's simple and oftentimes effective. As you can see, we interpret each subreddit as a point in high dimensional (64-dimensional) space based on its emoji distribution and allow PCA to project those points onto an embedding along the two principal components. Quite expectedly however, due perhaps to the sparsity of the emoji distributions across subreddits, PCA seems to exagerate the variance along the first few principal components leaving behind an uninspiring embedding. We can definitely do better.
 
-![png](output_37_0.png)
+![png](../assets/2018-04-02-visualizing-reddit-sentiments-with-emojis/output_37_0.png)
 
 #### Construct Low Dimensional Embedding with t-SNE
 At the suggestion of Shuai, we will instead use the t-SNE algorithm to do dimensionality reduction on our emoji distributions. Because the t-SNE approach operates in a manner that engages in preserving local neighborhoods, it proves robust against outliers and is quite appropriate for this sort of task. Note, however, that with this embedding the euclidean distance between points is no longer a good approximation of sentimental distance between those associated subreddits; i.e. unlike PCA, t-SNE is non-convex and while it will naturally attempt to preserve high dimensional cluster locality in lower dimensions, it makes no guarantees that distances between clusters within the lower dimensional embedding holds much meaning (the global geometry also seems to be quite substantially sensitive to the perplexity parameter). This makes t-SNE great for visualization but not so great for learning interpolatable, latent space representations (it's not made for that anyways I don't think).
 
-![png](output_39_0.png)
+![png](../assets/2018-04-02-visualizing-reddit-sentiments-with-emojis/output_39_0.png)
 
 #### Highlights of Interesting t-SNE Clusters
 Regardless, t-SNE in this case produces great results towards our end goal. Here, we manually highlight a few of the interesting clusters that show up within our embedding. Notably, subreddits from the following categories are featured:
@@ -120,45 +120,47 @@ Regardless, t-SNE in this case produces great results towards our end goal. Here
 
 An interesting thing to note here is how sports subreddits like r/nfl, r/nba, r/baseball, and r/sports are clustered together, however, r/soccer is not; this is perhaps an example of how interrelated subreddits with analogous subject matters, sports in this case, can still house discussions with diveregent sentimental atmospheres.
 
-![png](output_41_0.png)
+![png](../assets/2018-04-02-visualizing-reddit-sentiments-with-emojis/output_41_0.png)
 
 #### Spectral Clustering with RBF Kernel
 Now that we have a workable embedding, we will attempt to label subreddit clusters. Our first attempt will be with the spectral clustering algorithm, specifically using the default RBF kernel to generate the underlying affinity matrix. This gives us respectable results and is able to formulate sensible clusters to the eye. However, we will later come to see that the spectral clustering technique, somewhat from rough empirical insight, is not so well suited for this particular application (especially in comparison to something like K-means).
 
-![png](output_43_0.png)
+![png](../assets/2018-04-02-visualizing-reddit-sentiments-with-emojis/output_43_0.png)
+
+<iframe width="800" height="800" frameborder="0" scrolling="no" src="//plot.ly/~wiskojo/7.embed"></iframe>
 
 #### Calculate Pairwise Discrepancy of Emoji Distributions across Subreddits
 Taking a peak at the underlying affinitiy matrix generated by the spectral clustering algorithm we may start to become curious as to what the sentimental distance between the various subreddits may look like; perhaps we can generate our own pre-computed affinity matrix with some metric that is more appropriate. Here is where JS divergence comes in. If we interpret each point representing a subreddit in 64-dimensional space as a probability distribution, we can find the *distance* between them by calculating the pairwise KL divergence between each subreddit; we will follow through with this line of reasoning but instead use JS distance instead of KL for purposes of symmetry. We can see that the generated JS matrix below is very similar to the affinity matrix above. In fact, we can convert our JS measure of *distance* into *affinity* by subtracting each element in the matrix from the max element of the JS matrix. This will generate an affinity matrix derived from JS distance that is very similar to the affinity matrix produced by spectral clustering with the RBF kernel. Perhaps this demonstrates some mathematical connection between the two methodologies but I'm not so sure at this point in time.
 
-<iframe width="900" height="800" frameborder="0" scrolling="no" src="//plot.ly/~wiskojo/9.embed"></iframe>
+<iframe width="800" height="800" frameborder="0" scrolling="no" src="//plot.ly/~wiskojo/9.embed"></iframe>
 
 #### Spectral Clustering with Affinity Matrix derived from J-S Divergence
 We can feed our pre-computed affinity matrix to the spectral clustering algorithm and see that, expectedly, the clustering is very similar to our previous attempt.
 
-![png](output_50_0.png)
+![png](../assets/2018-04-02-visualizing-reddit-sentiments-with-emojis/output_50_0.png)
 
 #### K-Means Clustering
 Falling back on more conventional methods, we attempt to generate a clustering with the K-means algorithm which actually proves to be rather effective. What isn't readily obvious is that spectral clustering's focus on graph connectivity makes it less suitable for this particular task and that K-means, which excels at finding globular clusters grouped by geometrical proximity, seems to be the more appropriate technique here.
 
-![png](output_52_0.png)
+![png](../assets/2018-04-02-visualizing-reddit-sentiments-with-emojis/output_52_0.png)
 
 #### Visualizing Strong Subreddit Sentimental Connections
 Perhaps clusters don't tell the whole story; this thought urges us to pursue a different kind of visualization for our emoji distributions that would perhaps help elucidate the difference in results and effectiveness between applying K-means and spectral clustering. With this in mind, we generate a network graph for our data with subreddits as nodes and edges connecting between subreddits whose JS distance is lower than a predefined threshold (or rather in this case conversely that the pairwise affinity is higher than some predefined threshold--default 0.45). Interestingly enough, we see that even within some very obvious, strongly coupled, subreddit clusters, that the subreddits within those clusters don't have sufficient affinity to be connected. We can then deduce that t-SNE succesfully localizes these clusters as neighbors in the embedding due to their relative similarity; i.e. subreddits that are highly sentimentally idiosyncratic and are clustered together are not necessarily very similar to one another, but they are just so far removed from every other subreddit that they are forced into being neighbors. This could explain why spectral clustering, which focuses prominently on connectivity strength, fails to appropriately find these clusters and why on the other hand K-means, which focuses on relative geometric proximity, excels.
 
-<iframe width="900" height="800" frameborder="0" scrolling="no" src="//plot.ly/~wiskojo/11.embed"></iframe>
+<iframe width="800" height="460" frameborder="0" scrolling="no" src="//plot.ly/~wiskojo/11.embed"></iframe>
 
 #### Interpreting Embedding Regions with Modes of Low-Dimensional Cluster Sentiments
 We are now interested in segmenting our embedding into distinct regions and assigning each an emoji which should represent that region's (of subreddits) collective sentiment. This is quite a difficult task with many open ended solutions. I imagine that one can possibly conceive an intricate autoencoder scheme that couples the task of learning a latent representation with that of predicting sentiments of collections of subreddits by constraining the cost function in some way. This is far too advanced and currently out of the scope of my skills and thus I will instead make a highly simplified attempt at interpreting the various regions of our generated t-SNE embedding. The strategy is this, first create local clusters within the lower dimensional embedding and aggregate the emoji distributions of each subreddit within that cluster into one collective, per cluster, emoji distribution. Then, simply take the mode (emoji) of the distribution and assign that emoji as the *collective sentiment* of that embedding region populated by the subreddits that constitute that cluster.
 
-![png](output_56_0.png)
+![png](../assets/2018-04-02-visualizing-reddit-sentiments-with-emojis/output_56_0.png)
 
-<iframe width="900" height="800" frameborder="0" scrolling="no" src="//plot.ly/~wiskojo/13.embed"></iframe>
+<iframe width="800" height="460" frameborder="0" scrolling="no" src="//plot.ly/~wiskojo/13.embed"></iframe>
 
 ### Putting It All Together
 ***
 We've now examined various interesting aspects of our sentiment data, investigated a handful of neat techniques for data analysis, and successfully gathered up some useful results from our explorative endeavor. Assembling these diverse components together, we can now establish a somewhat polished *Reddit Sentiment Map* of sorts that is the culmination of our lighthearted scientific expedition.
 
-<iframe width="900" height="800" frameborder="0" scrolling="no" src="//plot.ly/~wiskojo/15.embed"></iframe>
+<iframe width="800" height="460" frameborder="0" scrolling="no" src="//plot.ly/~wiskojo/15.embed"></iframe>
 
 ### Privacy/Ethics Consideration
 ***
