@@ -41,3 +41,7 @@ defaults:
 
 gems:
   - jekyll-seo-tag
+  
+# Disqus Comments
+disqus:
+    shortname:
