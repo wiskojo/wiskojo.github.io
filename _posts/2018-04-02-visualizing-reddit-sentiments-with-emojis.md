@@ -10,67 +10,25 @@ title: "Visualizing Reddit Sentiments with Emojis"
 </p>
 
 ### Overview
-Reddit is a social news aggregation site and discussion board that houses many interactive communities. These communities, termed "subreddits", each have a particular thematic focus that collectively spans many aspects of pop culture and beyond. In this study, we attempt to illuminate the sentimental nature of the discourses held within these various interconnected communities by means of visualizing their underlying communal sentiments. By the end of our study, we wish to realize a somewhat comprehensive map of Reddit that encapsulates the sentiments of some of its most popular subreddit communities.
+Reddit is a social news aggregation site and discussion board that houses many interactive communities. These communities, termed *subreddits*, each have a particular thematic focus that collectively spans many aspects of pop culture and beyond. In this study, we attempt to explore the sentimental nature of these various interconnected communities by means of analyzing the user comments posted within them. Our end goal is to realize a reasonably intuitive map of Reddit that encapsulates the sentimental ties among its most popular subreddit communities.
 
 ### Background
-In our endeavor to map the emotional contents of various subreddit communities, we will have to choose some form of sentiment analysis to conduct on each comment observation from our dataset. Sentiment analysis refers to the process of computationally extracting and quantifying the emotions, attitudes, and opinions expressed through textual data and is a specific subfield of the much broader discipline of natural language processing (NLP). Recent studies within this field into social media sentiments have successfully utilized a variety of noisy labels ranging from a handful of emoticons to assortments of hashtags as a form of distant supervision. Following this paradigmn, we will be incorporating a Deep Neural Network for sentiment classification that is detailed in a relatively recent paper published by Felbo et. al [1]. This work introduces an interesting approach to classifying textual data into sentimental categories of (64) relevant emojis. More specifically, the so-called "DeepMoji" model applies already established LSTM architectures to an extensive corpus of tweet-emoji labeled data to learn text-sentiment associations while also incorporating an original approach for transfer learning that the authors refer to as the "chain-thaw" method (which has been empirically shown by the authors to allow the model to generalize to more traditional sentiment analysis benchmarks). Taking inspiration from this work, we will apply the pretrained DeepMoji model towards the Reddit comments dataset in the hopes of being able to map subreddits into a low-dimensional embedding of sentiments. This clustering and visualization objective is similar to that of [2,3] in that we are trying to bring to light interesting relationships between various subreddit communities. In this case, however, we are less so interested about similarities in concrete subject matter and more so in the emotional connections/disparities between subreddits and of how these diverse communities encourage discussions that involve differential sentimental expressions.
+In our endeavor to map the emotional contents of various subreddit communities, we will have to choose some form of sentiment analysis to conduct on each comment observation from our dataset. Sentiment analysis refers to the process of computationally extracting and quantifying the emotions and attitudes expressed through textual data and is a specific subfield of the much broader discipline of natural language processing (NLP). Recent studies within this field, particularly into social media sentiments, have successfully utilized a variety of noisy labels ranging from emoticons to hashtags as an effective form of distant supervision. Following this paradigmn, we will be incorporating a Deep Neural Network for sentiment classification developed by Felbo et. al which can be found on their [Github page](https://github.com/bfelbo/DeepMoji). This work introduces an interesting approach to classifying textual data into sentimental categories of (64) relevant emojis. More specifically, the so-called *DeepMoji* model applies already established LSTM architectures to an extensive corpus of tweet-emoji labeled data to learn text-sentiment associations while also incorporating an original approach for transfer learning (referred to by the authors as the "chain-thaw" method) which allows it to generalize to more conventional sentiment classification tasks. Taking inspiration from this work, we will apply the pretrained *DeepMoji* model towards the Reddit comments dataset in the hopes of being able to map some of the top subreddit communities into a low-dimensional embedding of sentiments. This visualization objective is reminiscent of previous works found [here](https://peerj.com/articles/cs-4/) and [here](http://rhiever.github.io/redditviz/#) in that we are trying to bring to light interesting relationships between various subreddit communities. In this case, however, we are less so interested about similarities in concrete subject matter and more so in the emotional connections/disparities between subreddits and of how these diverse communities encourage discussions that involve differential sentimental expressions.
 
-*References*
-- 1) https://arxiv.org/pdf/1708.00524.pdf and https://github.com/bfelbo/DeepMoji
-- 2) https://peerj.com/articles/cs-4/
-- 3) http://rhiever.github.io/redditviz/#
+### Our Data
+For our dataset we will be using a small part of the enormous [Reddit comments dataset](https://www.reddit.com/r/datasets/comments/65o7py/updated_reddit_comment_dataset_as_torrents/) (March 2017 comments data). In the context of sentiment analysis, we can imagine that certain types of comments are not conducive to analysis. Obviously, comments that have been removed or comments of deleted users should not be included in the study. Additionally, comments with links and subreddit references will not be well understood by our sentiment model due to its lack of contextual information and should be removed as well. Comments with CSS formatting and such should be sanitized of any formatting strings and finally, due to architectural and computational constraints, we will choose to remove any comments with character count greater than 300 or less than 10. Note that there is still a *lot* more that we can do with this in terms of preprocessing but we will go with this simple solution for now as to not complicate our study.
 
-### Dataset
-- Dataset Name: Reddit Comments Dataset
-- Link to the dataset: https://www.reddit.com/r/datasets/comments/65o7py/updated_reddit_comment_dataset_as_torrents/
-- Number of observations: Millions of comments
-
-This is a dataset containing all Reddit comments posted from 2005-2017. We will be focusing on the latest available (2017) comment data, specifically for the month of March. The format of the file is a bz2 compressed JSON structure with the following column attributes (we will only be using the body, controversiality, score, and subreddit fields for this particular project):
-
-- author
-- author_cakeday
-- author_flair_css_class
-- author_flair_text
-- body
-- controversiality
-- created_utc
-- distinguished
-- edited
-- gilded
-- id
-- link_id
-- parent_id
-- retrieved_on
-- score
-- stickied
-- subreddit
-- subreddit_id
-
-### Data Cleaning/Preprocessing
-***
-The Reddit comments dataset is very clean and well-structured as it is. We will not have much to do in terms of data cleaning and wrangling. That being said, the dataset is quite large and must be loaded in selectively by chunks. For simplicity of this particularl study, we define the top *n* subreddits by subscriber count that we want to be included in the analysis and load in only comments from those specific subreddits (in addition to any custom defined subreddits in the notebook paramaters). After all relevant comments are loaded into our Pandas dataframe, we will preprocess the data focusing on removing obvious observations that will not work well with our study and ensuring that the input comment bodies are formatted correctly for the DeepMoji model to analyze.
-
-### Preliminary Data Preprocessing
-In the context of sentiment analysis, we can imagine that certain types of comments are not conducive to analysis. Obviously, comments that have been removed or comments of deleted users should not be included in the study. Additionally, comments with links and subreddit references will not be well understood by our sentiment model due to its lack of contextual information and should be removed as well. Comments with CSS formatting and such should be sanitized of any formatting strings and finally, due to architectural and computational constraints, we will choose to remove any comments with character count greater than 300 or less than 10. Note that there is still a *lot* more that we can do with this in terms of preprocessing but we will go with this simple solution for now as to not complicate our study.
-
-*Aside about the integrity of DeepMoji's outputs*
-<br>
-The reason for which we choose to remove all comments with character count > 300 is because DeepMoji was trained on Twitter data which has a similar character count limit. Any lengthy comment will not be representative of DeepMoji's training sample and thus may or may not end up just "confusing" the model. Regardless, I'm pretty sure DeepMoji's attention layer will focus in on particular keywords pretty early on in an input sentence anyways and thus very long comments will probably just drain precious computation time with very little benefits.
-
-### Set up the DeepMoji Neural Network
+### DeepMoji
 
 *Model Description (from their Github page)*
 <br>
-"DeepMoji is a model trained on 1.2 billion tweets with emojis to understand how language is used to express emotions. Through transfer learning the model can obtain state-of-the-art performance on many emotion-related text modeling tasks."
+> DeepMoji is a model trained on 1.2 billion tweets with emojis to understand how language is used to express emotions. Through transfer learning the model can obtain state-of-the-art performance on many emotion-related text modeling tasks.
 
-If you want more details on the technical aspects of the model feel free to check out the corresponding white paper referenced at the beginning of this notebook. Omitting much of the complexity of the architecture, the model basically takes in a tokenized string input which it will analyze up to some predefined max length, and it will make a prediction as to what emoji(s) would best associate with the input text (as a normalized probability distribution over 64 emojis outputted by the final softmax layer--the exact emojis of which can be found below).
+If you want more details on the technical aspects of the model feel free to check out the corresponding [white paper](https://arxiv.org/pdf/1708.00524.pdf). Omitting much of the complexity of the architecture, the model basically takes in a tokenized string input which it will analyze up to some predefined max length, and it will make a prediction as to what emoji(s) would best associate with the input text (as a normalized probability distribution over 64 emojis outputted by the final softmax layer--the exact emojis of which can be found below).
 
 However, before the model can be used for predictive tasks, it needs to first be initialized with a vocabulary (and pretrained weights in this case). The vocabulary for the pretrained model is included in the model's Github page which we've copied over into the project directory and the pretrained weights can be downloaded from a dropbox link that is also provided on the Github page. Optimally, we would want to expand the vocabulary to include words that are found in our dataset but not in the original pretrained dataset, however, this would be a pain so we'll chose to overlook this complication also. Here we also configure the max (character) length that the model will analyze. For this study, we choose to use a max length of only 30 characters because of computational limitations. If one had access to better hardware, they can freely change the param_deepmoji_maxlen defined at the top of the notebook to analyze more characters from each comment.
 
 ![Emoji Overview](https://raw.githubusercontent.com/wiskojo/wiskojo.github.io/master/resources/2018-04-02-visualizing-reddit-sentiments-with-emojis/emoji_overview.png)
-
-### Process Comments Through the DeepMoji Model
-We now go through the various steps needed to batch analyze our comment data; this includes tokenization of comments pre-analysis and then afterwards populating the appropriate column attributes of our dataframe with the predictions and confidence outputted by DeepMoji post-analysis (in this case we choose to consider only the top 2 emojis predicted by the model along with their associated probabilities).
 
 ### Data Visualization
 ***
