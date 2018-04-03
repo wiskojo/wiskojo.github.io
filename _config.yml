@@ -44,4 +44,4 @@ gems:
   
 # Disqus Comments
 disqus:
-    shortname:
+    shortname: https-wiskojo-github-io
