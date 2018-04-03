@@ -14,10 +14,10 @@ permalink:          /:month/:day/:year/:title/
 # Markdown
 markdown:           kramdown
 
-Navigation
+# Navigation
 nav:
- - name:           "About"
-   href:           "//wiskojo.github.io/about"
+  - name:           "About"
+    href:           "//wiskojo.github.io/about"
 #  - name:           "Download"
 #    href:           "//github.com/gfjaru/Kiko/releases"
 
