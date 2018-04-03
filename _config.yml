@@ -1,19 +1,11 @@
-# # # # # # # #
-#   K i k o   #
-# # # # # # # #
-
 # Basic
-name:               "Kiko"
-description:        "a clean, lightweight and minimalistic blog theme for jekyll"
+name:               "Wis"
+description:        "My mediocre blog"
 
-# jekyll-seo-tag, see: http://www.rubydoc.info/gems/jekyll-seo-tag/1.2.0
-url:                "//kiko.gfjaru.com"
-author:             "gfjaru"
-twitter:
-  username:         "gfjaru"
-#facebook:
-#  app_id:           1234
-#    publisher:      1234
+url:                "//wiskojo.github.io"
+author:             "Wis"
+github:
+  username:         "wiskojo"
 
 # URL
 baseurl:            ""
@@ -24,11 +16,11 @@ permalink:          /:year/:month/:day/:title/
 markdown:           kramdown
 
 # Navigation
-nav:
-  - name:           "About"
-    href:           "//kiko.gfjaru.com/about"
-  - name:           "Download"
-    href:           "//github.com/gfjaru/Kiko/releases"
+# nav:
+#  - name:           "About"
+#    href:           "//kiko.gfjaru.com/about"
+#  - name:           "Download"
+#    href:           "//github.com/gfjaru/Kiko/releases"
 
 # Sass
 sass:
