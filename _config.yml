@@ -1,5 +1,6 @@
 # Basic
-name:               "Wis' Mediocre Blog"
+title:              "Wis' Mediocre Blog"
+name:               "Wis"
 description:        "My mediocre blog"
 
 url:                "//wiskojo.github.io"
@@ -9,7 +10,7 @@ github:
 
 # URL
 baseurl:            ""
-permalink:          /:month/:day/:year/:title/
+permalink:          /:title/
 
 # Markdown
 markdown:           kramdown
@@ -18,8 +19,6 @@ markdown:           kramdown
 nav:
   - name:           "About"
     href:           "//wiskojo.github.io/about"
-#  - name:           "Download"
-#    href:           "//github.com/gfjaru/Kiko/releases"
 
 # Sass
 sass:
