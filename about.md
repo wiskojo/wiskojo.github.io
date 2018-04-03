@@ -3,6 +3,4 @@ title: About
 permalink: /about/
 ---
 
-<p class="lead"><a href="http://github.com/gfjaru/Kiko">Kiko</a> is a theme for <a href="http://jekyllrb.com">Jekyll</a>, the static site generator.</p>
-
-Kiko is simple, lightweight theme. It's designed and developed by [@gfjaru](https://twitter.com/gfjaru).
+My name is Wis Kojohnjaratkul. I'm currently an undergraduate student studying computer science at the University of California, San Diego. I find ML stuff pretty interesting so I'm just riding along this big data + deep learning wave and seeing where it leads me. Apparently I also try to write blog posts now too so that's pretty neat.
