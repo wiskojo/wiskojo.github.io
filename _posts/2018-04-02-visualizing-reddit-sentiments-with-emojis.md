@@ -5,7 +5,9 @@ title: "Visualizing Reddit Sentiments with Emojis"
 ## Introduction and Background
 ***
 
-![Reddit Logo](https://upload.wikimedia.org/wikipedia/en/thumb/8/82/Reddit_logo_and_wordmark.svg/320px-Reddit_logo_and_wordmark.svg.png)
+<p align="center"> 
+<img src="https://raw.githubusercontent.com/wiskojo/wiskojo.github.io/master/resources/2018-04-02-visualizing-reddit-sentiments-with-emojis/320px-Reddit_logo_and_wordmark.svg.png">
+</p>
 
 ### Overview
 Reddit is a social news aggregation site and discussion board that houses many interactive communities. These communities, termed "subreddits", each have a particular thematic focus that collectively spans many aspects of pop culture and beyond. In this study, we attempt to illuminate the sentimental nature of the discourses held within these various interconnected communities by means of visualizing their underlying communal sentiments. By the end of our study, we wish to realize a somewhat comprehensive map of Reddit that encapsulates the sentiments of some of its most popular subreddit communities.
@@ -65,7 +67,7 @@ If you want more details on the technical aspects of the model feel free to chec
 
 However, before the model can be used for predictive tasks, it needs to first be initialized with a vocabulary (and pretrained weights in this case). The vocabulary for the pretrained model is included in the model's Github page which we've copied over into the project directory and the pretrained weights can be downloaded from a dropbox link that is also provided on the Github page. Optimally, we would want to expand the vocabulary to include words that are found in our dataset but not in the original pretrained dataset, however, this would be a pain so we'll chose to overlook this complication also. Here we also configure the max (character) length that the model will analyze. For this study, we choose to use a max length of only 30 characters because of computational limitations. If one had access to better hardware, they can freely change the param_deepmoji_maxlen defined at the top of the notebook to analyze more characters from each comment.
 
-![Emoji Overview](https://raw.githubusercontent.com/bfelbo/DeepMoji/master/emoji_overview.png)
+![Emoji Overview](https://raw.githubusercontent.com/wiskojo/wiskojo.github.io/master/resources/2018-04-02-visualizing-reddit-sentiments-with-emojis/emoji_overview.png)
 
 ### Process Comments Through the DeepMoji Model
 We now go through the various steps needed to batch analyze our comment data; this includes tokenization of comments pre-analysis and then afterwards populating the appropriate column attributes of our dataframe with the predictions and confidence outputted by DeepMoji post-analysis (in this case we choose to consider only the top 2 emojis predicted by the model along with their associated probabilities).
