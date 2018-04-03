@@ -87,7 +87,7 @@ We may also be interested in the weighted and unweighted emoji distribution of e
 <iframe width="800" height="460" frameborder="0" scrolling="no" src="//plot.ly/~wiskojo/5.embed?link=false"></iframe>
 
 <div>
-    <a href="https://plot.ly/~wiskojo/5/?share_key=2VYrLpc6K1yrs7zRV85aTN" target="_blank" title="Plot 5" style="display: block; text-align: center;"><img src="https://plot.ly/~wiskojo/5.png?share_key=2VYrLpc6K1yrs7zRV85aTN" alt="Plot 5" style="max-width: 100%;width: 800px;"  width="800" onerror="this.onerror=null;this.src='https://plot.ly/404.png';" /></a>
+    <a href="https://plot.ly/~wiskojo/5/?share_key=2VYrLpc6K1yrs7zRV85aTN" target="_blank" title="Plot 5" style="display: block; text-align: center;"><img src="https://plot.ly/~wiskojo/5.png?share_key=2VYrLpc6K1yrs7zRV85aTN" alt="Plot 5" style="max-width: 100%;width: 800px;"  width="460" onerror="this.onerror=null;this.src='https://plot.ly/404.png';" /></a>
     <script data-plotly="wiskojo:5" sharekey-plotly="2VYrLpc6K1yrs7zRV85aTN" src="https://plot.ly/embed.js" async></script>
 </div>
 
