@@ -32,7 +32,7 @@ For our dataset we will be using a small portion of the enormous [Reddit comment
 ***
 At this point, we can already do some preliminary data visualization to get a sense of how redditors (a nickname for Reddit users) express themselves on Reddit. For example, we may be interested in which emojis are most commonly predicted by our DeepMoji model for comments from across all the relevant subreddits. From the chart below we can see that many people on Reddit express 😕 👍🏼 😳 and 😡 in their posts.
 
-<iframe width="100%" height="60%" frameborder="0" scrolling="no" src="//plot.ly/~wiskojo/1.embed?link=false"></iframe>
+<iframe width="100%" height="100%" frameborder="0" scrolling="no" src="//plot.ly/~wiskojo/1.embed?link=false"></iframe>
 
 Perhaps we are also interested in what the emoji distribution of each individual subreddit looks like. Let's take a look then, for example, at what emojis are predicted for the very popular subreddit, r/AskReddit.
 
