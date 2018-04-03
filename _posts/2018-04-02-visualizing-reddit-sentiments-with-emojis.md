@@ -112,4 +112,4 @@ We've now examined various interesting aspects of our sentiment data, investigat
 
 ### Conclusions and Discussion
 ***
-By exploration of various analytical methods, we've been able to construct a map of Reddit that visually illustrates the internal diversity of its communal sentiments; we've shown that the very intriguing DeepMoji model can be utilized to assist us with this construction, and that in combination with the help of other powerful data analytic techniques, we were indeed able to successfully carry out a playful study that combines two amusing and somewhat outlandish aspects of modern culture, *Reddit and Emojis*.
+By exploration of various analytical methods, we've been able to construct a map of Reddit that visually illustrates the internal diversity of its communal sentiments; we've shown that the very intriguing *DeepMoji* model can be utilized to assist us with this construction, and that in combination with the help of other powerful data analytic techniques, we were indeed able to successfully carry out a playful study that combines two amusing and somewhat outlandish aspects of modern culture, *Reddit and Emojis*.
