@@ -82,9 +82,9 @@ We may be interested in which emojis are most commonly predicted by our DeepMoji
 #### Visualize Per-Subreddit Emoji Distribution
 We may also be interested in the weighted and unweighted emoji distribution of each subreddit (the unweighted distribution is precisely the frequency of each emoji predicted by our DeepMoji model for all comments from that particular subreddit whereas the weighted distribution scales the frequency of the predicted emoji with the model's associated predictive confidence--the default configuration of this notebook will use the weighted distribution when conducting further analysis).
 
-<iframe width="800" height="460" frameborder="0" scrolling="no" src="//plot.ly/~wiskojo/3.embed?link=false"></iframe>
+<iframe width="700" height="410" frameborder="0" scrolling="no" src="//plot.ly/~wiskojo/3.embed?link=false"></iframe>
 
-<iframe width="800" height="460" frameborder="0" scrolling="no" src="//plot.ly/~wiskojo/5.embed?link=false"></iframe>
+<iframe width="700" height="410" frameborder="0" scrolling="no" src="//plot.ly/~wiskojo/5.embed?link=false"></iframe>
 
 ### Data Analysis and Results
 ***
