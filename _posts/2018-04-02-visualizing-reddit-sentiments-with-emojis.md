@@ -108,7 +108,7 @@ We are now interested in segmenting our embedding into distinct regions and assi
 ***
 We've now examined various interesting aspects of our sentiment data, investigated a handful of neat techniques for data analysis, and successfully gathered up some useful results from our explorative endeavor. Assembling these diverse components together, we can now establish a somewhat intuitive *Reddit Sentiment Map* of sorts that is the culmination of our lighthearted scientific expedition.
 
-<iframe frameborder="0" width="100%" src="//plot.ly/~wiskojo/15.embed?autosize=True?link=false?modebar=false"></iframe>
+<iframe width="700" height="410" frameborder="0" scrolling="no" src="//plot.ly/~wiskojo/13.embed?autosize=True?link=false?modebar=false"></iframe>
 
 ### Conclusions and Discussion
 ***
