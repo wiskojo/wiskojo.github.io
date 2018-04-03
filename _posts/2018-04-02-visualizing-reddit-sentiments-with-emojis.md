@@ -1,5 +1,5 @@
 ---
-title:        "Visualizing Reddit Sentiments with Emojis"
+title: "Visualizing Reddit Sentiments with Emojis"
 ---
 
 ## Introduction and Background
