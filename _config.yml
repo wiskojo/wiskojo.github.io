@@ -1,24 +1,23 @@
 # Basic
-name:               "Wis"
+name:               "Wis' Mediocre Blog"
 description:        "My mediocre blog"
 
 url:                "//wiskojo.github.io"
-author:             "Wis"
+author:             "Wis Kojohnjaratkul"
 github:
   username:         "wiskojo"
 
 # URL
 baseurl:            ""
-#baseurl:            "" #For Root Domain
 permalink:          /:month/:day/:year/:title/
 
 # Markdown
 markdown:           kramdown
 
-# Navigation
-# nav:
-#  - name:           "About"
-#    href:           "//kiko.gfjaru.com/about"
+Navigation
+nav:
+ - name:           "About"
+   href:           "//wiskojo.github.io/about"
 #  - name:           "Download"
 #    href:           "//github.com/gfjaru/Kiko/releases"
 
