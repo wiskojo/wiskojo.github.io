@@ -1,5 +1,5 @@
 # Basic
-name:               "Wis"
+name:               "Wis Kojohnjaratkul"
 description:        "My mediocre blog"
 
 url:                "//wiskojo.github.io"
@@ -10,7 +10,7 @@ github:
 # URL
 baseurl:            ""
 #baseurl:            "" #For Root Domain
-permalink:          /:year/:month/:day/:title/
+permalink:          /:month/:day/:year/:title/
 
 # Markdown
 markdown:           kramdown

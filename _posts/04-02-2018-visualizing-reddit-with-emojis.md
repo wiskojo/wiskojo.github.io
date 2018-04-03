@@ -1,3 +1,11 @@
+---
+title:        "Visualizing Reddit Sentiments with Emojis"
+# jekyll-seo-tag
+description:  ""
+image:        ""
+author:       "Wis"
+---
+
 # Visualizing Reddit Sentiments with Emojis
 
 ## Introduction and Background
