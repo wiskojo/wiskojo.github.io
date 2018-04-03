@@ -38,7 +38,7 @@ Perhaps we are also interested in what the emoji distribution of each individual
 
 <iframe width="700" height="410" frameborder="0" scrolling="no" src="//plot.ly/~wiskojo/3.embed?link=false"></iframe>
 
-For the sake of experimentation, we can also choose to consider weighted emoji distributions. The weighted distribution below, unlike the unweighted one above, scales the frequency of each comment-emoji prediction by the model's associated predictive confidence for each comment. Note that the distribution below is also for r/Askreddit but it definitely looks a little bit different.
+For the sake of experimentation, we can also choose to consider weighted emoji distributions. The weighted distribution below, unlike the unweighted one above, scales the frequency of each comment-emoji prediction by the model's associated predictive confidence for each comment. Note that the distribution below is also for r/Askreddit but it definitely looks quite a bit different.
 
 <iframe width="700" height="410" frameborder="0" scrolling="no" src="//plot.ly/~wiskojo/5.embed?link=false"></iframe>
 
