@@ -242,7 +242,9 @@ table {
   border-collapse: collapse;
 }
 
-td,
+td {
+  font-size: 0.75rem;
+},
 th {
   padding: .25rem .5rem;
   border: 1px solid #e5e5e5;
