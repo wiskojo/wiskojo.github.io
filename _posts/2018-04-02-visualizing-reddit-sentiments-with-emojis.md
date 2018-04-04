@@ -14,7 +14,7 @@ comments: true
 Reddit is a social news aggregation site and discussion board that houses many interactive communities. These communities, termed *subreddits*, each have a particular thematic focus that collectively spans many aspects of pop culture and beyond. In this study, we attempt to explore the sentimental nature of these various interconnected communities by means of analyzing the user comments posted within them. Our end goal is to realize a reasonably intuitive map of Reddit that encapsulates the sentimental ties among some of its most popular subreddit communities.
 
 ### Background
-In our endeavor to map the emotional contents of various subreddit communities, we will have to choose some form of sentiment analysis to conduct on each comment observation from our dataset. Sentiment analysis refers to the process of computationally extracting and quantifying the emotions and attitudes expressed through textual data and is a specific subfield of the much broader discipline of natural language processing (NLP). Recent studies within this field, particularly into social media sentiments, have successfully utilized a variety of noisy labels ranging from emoticons to hashtags as effective forms of distant supervision. Following this paradigmn, we will be incorporating a Deep Neural Network for sentiment classification developed by Felbo et. al which can be found on their [Github page](https://github.com/bfelbo/DeepMoji). This work introduces an interesting approach to classifying textual data into sentiment categories of (64) relevant emojis. More specifically, the so-called *DeepMoji* model applies the already well established LSTM architecture to an extensive corpus of tweet-emoji labeled data to learn text-sentiment associations while also incorporating an original approach for transfer learning (referred to by the authors as the "chain-thaw" method) which allows it to generalize to more conventional sentiment classification tasks. Taking inspiration from this work, we will apply the pretrained *DeepMoji* model towards the Reddit comments dataset in the hopes of being able to map some of the top subreddit communities into a low-dimensional embedding of sentiments. This visualization objective is reminiscent of previous works found [here](https://peerj.com/articles/cs-4/) and [here](http://rhiever.github.io/redditviz/#) in that we are trying to bring to light interesting relationships between various subreddit communities. In this case, however, we are less so interested about similarities in concrete subject matter and more so in the emotional connections/disparities between subreddits and of how these diverse communities encourage discussions that involve differential sentimental expressions.
+In our endeavor to map the emotional contents of various subreddit communities, we will have to choose some form of sentiment analysis to conduct on each comment observation from our dataset. Sentiment analysis refers to the process of computationally extracting and quantifying the emotions and attitudes expressed through textual data and is a specific subfield of the much broader discipline of natural language processing (NLP). Recent studies within this field, particularly into social media sentiments, have successfully utilized a variety of noisy labels ranging from emoticons to hashtags as effective forms of distant supervision. Following this paradigmn, we will be incorporating a Deep Neural Network for sentiment classification developed by Felbo et. al which can be found on their [Github page](https://github.com/bfelbo/DeepMoji). This work introduces an interesting approach to classifying textual data into sentiment categories of (64) relevant emojis. More specifically, the so-called *DeepMoji* model applies the already well established LSTM architecture to an extensive corpus of tweet-emoji labeled data to learn text-sentiment associations while also incorporating an original approach for transfer learning (referred to by the authors as the "chain-thaw" method) which allows it to generalize to more conventional sentiment classification tasks. Taking inspiration from this work, we will apply the pretrained *DeepMoji* model towards the Reddit comments dataset in the hopes of being able to map some of the top subreddit communities into a low-dimensional embedding of sentiments. This visualization objective is reminiscent of previous works such as [this](https://peerj.com/articles/cs-4/) and [this](http://rhiever.github.io/redditviz/#) in that we are trying to bring to light interesting relationships between various subreddit communities. In this case, however, we are less so interested about similarities in concrete subject matter, and more so in the emotional connections/disparities between subreddits and of how these diverse communities encourage discussions that involve differential sentimental expressions.
 
 ### DeepMoji
 Model Description (from their Github page)
@@ -26,113 +26,7 @@ If you want more details on the technical aspects of the model, feel free to che
 ![Emoji Overview](https://raw.githubusercontent.com/wiskojo/wiskojo.github.io/master/resources/2018-04-02-visualizing-reddit-sentiments-with-emojis/emoji_overview.png)
 
 ### Our Data
-For our dataset we will be using a small portion of the enormous [Reddit comments dataset](https://www.reddit.com/r/datasets/comments/65o7py/updated_reddit_comment_dataset_as_torrents/), specifically that of the month of March 2017. From within this data subset, we are only interested in comments that come from the top 125 or so subreddits (give and take a handful of extra subreddits that I threw in the mix just for the sake of fun and personal curiosity). Likewise, it is important to note also that we are only sampling from comments that fullfill certain criterias. For example, comments that have been removed or comments of deleted users are not considered. Comments with links and/or subreddit references will not be well understood by our sentiment model due to its lack of contextual information and are exempt from the study as well. Comments with special formatting and such are "sanitized" before they are analyzed and finally, due to architectural and computational constraints, we also choose to remove any comments with character count greater than 300 or less than 10. Note that there is certainly still a *lot* more that we can do with this in terms of preprocessing but we will choose to go with this simple solution for now as to not complicate our study. With this set of comments data ready (totalling around 3-4 million comments), we let the *DeepMoji* model do its thing and give us sentiment predictions, in the form of emojis, for each comment observation. With that all set and done, we are now ready to move on to bigger and better things. 
-
-<table border="1" class="dataframe">
-  <thead>
-    <tr style="text-align: right;">
-      <th></th>
-      <th>body</th>
-      <th>subreddit</th>
-      <th>score</th>
-      <th>controversiality</th>
-      <th>emoji</th>
-      <th>prob</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <th>0</th>
-      <td>No more than two shots of vodka, and two glass...</td>
-      <td>AskReddit</td>
-      <td>1</td>
-      <td>0</td>
-      <td>39</td>
-      <td>0.276799</td>
-    </tr>
-    <tr>
-      <th>1</th>
-      <td>Counterpoint: it might not be a better choice ...</td>
-      <td>nfl</td>
-      <td>1</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0.042279</td>
-    </tr>
-    <tr>
-      <th>2</th>
-      <td>For today.Next week we could be making the pap...</td>
-      <td>politics</td>
-      <td>1</td>
-      <td>0</td>
-      <td>19</td>
-      <td>0.063925</td>
-    </tr>
-    <tr>
-      <th>3</th>
-      <td>Some people like the SEALs that got killed, I ...</td>
-      <td>politics</td>
-      <td>2</td>
-      <td>0</td>
-      <td>42</td>
-      <td>0.105757</td>
-    </tr>
-    <tr>
-      <th>4</th>
-      <td>No it wouldn't. Just let trans people use the ...</td>
-      <td>AskReddit</td>
-      <td>2</td>
-      <td>0</td>
-      <td>55</td>
-      <td>0.079227</td>
-    </tr>
-    <tr>
-      <th>5</th>
-      <td>this fucking sucks big balls, terrible matchup...</td>
-      <td>MMA</td>
-      <td>1</td>
-      <td>0</td>
-      <td>32</td>
-      <td>0.351832</td>
-    </tr>
-    <tr>
-      <th>6</th>
-      <td>I'd watch some anime.  It's illegal to pirate ...</td>
-      <td>AskReddit</td>
-      <td>2</td>
-      <td>0</td>
-      <td>51</td>
-      <td>0.076171</td>
-    </tr>
-    <tr>
-      <th>7</th>
-      <td>As I myself am not upset, I can only assume yo...</td>
-      <td>pics</td>
-      <td>2</td>
-      <td>0</td>
-      <td>63</td>
-      <td>0.054844</td>
-    </tr>
-    <tr>
-      <th>8</th>
-      <td>Correct. C# requires garbage collection suppor...</td>
-      <td>programming</td>
-      <td>47</td>
-      <td>0</td>
-      <td>22</td>
-      <td>0.063437</td>
-    </tr>
-    <tr>
-      <th>9</th>
-      <td>Jon Jones really wanted to keep his nipples in...</td>
-      <td>MMA</td>
-      <td>5</td>
-      <td>0</td>
-      <td>12</td>
-      <td>0.089392</td>
-    </tr>
-  </tbody>
-</table>
+For our dataset we will be using a small portion of the enormous [Reddit comments dataset](https://www.reddit.com/r/datasets/comments/65o7py/updated_reddit_comment_dataset_as_torrents/), specifically for the month of March 2017. From within this data subset, we are only interested in comments that come from the top 125 or so subreddits (give and take a handful of extra subreddits that I threw in the mix just for the sake of fun and personal curiosity). Furthermore, it is important to note also that we are only sampling from comments that fullfill certain criterias. For example, comments that have been removed or comments of deleted users are not considered. Likewise, comments with links and/or subreddit references will not be well understood by our sentiment model due to its lack of contextual information and are thus exempt from the study as well. Comments with special formatting and such are "sanitized" before they are analyzed and finally, due to architectural and computational constraints, we also choose to remove any comments with character count greater than 300 or less than 10. Note that there is certainly still a *lot* more that we can do with this in terms of preprocessing but we will choose to go with this simple solution for now as to not complicate our study. With this set of comments data ready (totalling around 3-4 million comments), we let *DeepMoji* do its thing and then we collect its sentiment predictions, in the form of emojis, for each comment observation. With that all set and done, we are now ready to move on to bigger and better things. 
 
 ### Data Visualization
 ***
@@ -180,14 +74,14 @@ An interesting thing to note here is how sports subreddits like r/nfl, r/nba, r/
 ![png](https://raw.githubusercontent.com/wiskojo/wiskojo.github.io/master/resources/2018-04-02-visualizing-reddit-sentiments-with-emojis/output_41_0.png)
 
 #### Spectral Clustering with RBF Kernel
-Now that we have a workable embedding, we will begin attempting to label subreddit clusters. Our first attempt will be with the [spectral clustering algorithm](https://en.wikipedia.org/wiki/Spectral_clustering), specifically using the default RBF kernel to generate the underlying affinity matrix. This gives us respectable results and is able to formulate sensible clusters to the eye. However, we will later come to see that the spectral clustering technique, somewhat from rough empirical insight, is not so well suited for this particular application (especially in comparison to something like K-means).
+Now that we have a workable embedding, we will begin attempting to label subreddit clusters. Our first attempt will be with the [spectral clustering algorithm](https://en.wikipedia.org/wiki/Spectral_clustering), specifically using the default RBF kernel to generate the underlying affinity matrix for our data. This gives us respectable results and is able to formulate sensible clusters to the eye. However, we will later come to see that the spectral clustering technique, somewhat from rough empirical insight, is not so well suited for this particular application (especially in comparison to something like K-means).
 
 ![png](https://raw.githubusercontent.com/wiskojo/wiskojo.github.io/master/resources/2018-04-02-visualizing-reddit-sentiments-with-emojis/output_43_0.png)
 
 <iframe width="700" height="700" frameborder="0" scrolling="no" src="//plot.ly/~wiskojo/17.embed?link=false"></iframe>
 
 #### Subreddit Sentimental Discrepancy
-Taking a peak at the underlying affinitiy matrix generated by the spectral clustering algorithm we may start to become curious as to what the sentimental distances between the various subreddits may look like; perhaps we can generate our own pre-computed affinity matrix with some metric of distance that is more appropriate than the one implicitly given by the RBF kernel. Here is where [JS divergence](https://en.wikipedia.org/wiki/Jensen%E2%80%93Shannon_divergence) comes in. If we interpret each point representing a subreddit in 64-dimensional space as a probability distribution, we can find the *distance* between them by calculating the pairwise KL divergence between each subreddit; we will follow through with this line of reasoning but use JS distance instead of KL for purposes of symmetry. We can see that the generated JS matrix below is very similar to the affinity matrix above. In fact, we can convert our JS measure of *distance* into *affinity* by subtracting each element in the matrix from the max element of the JS matrix. This will produce an affinity matrix derived from JS distance that is very similar to the affinity matrix generated by spectral clustering with the RBF kernel. Perhaps this demonstrates some mathematical connection between the two methodologies that arise in this particular circumstance but I'm not so sure at the moment.
+Taking a peak at the underlying affinitiy matrix generated by the spectral clustering algorithm, we may start to become curious as to what the sentimental distances between the various subreddits may look like; perhaps we can generate our own pre-computed affinity matrix with some metric of distance that is more appropriate than the one implicitly given by the RBF kernel. Here is where [JS divergence](https://en.wikipedia.org/wiki/Jensen%E2%80%93Shannon_divergence) comes in. If we interpret each point representing a subreddit in 64-dimensional space as a probability distribution, we can find the *distance* between them by calculating the pairwise KL divergence between each subreddit; we will follow through with this line of reasoning but use JS distance instead of KL for purposes of symmetry. We can see that the generated JS matrix below is very similar to the affinity matrix above. In fact, we can convert our JS measure of *distance* into *affinity* by subtracting each element in the matrix from the max element of the JS matrix. This will produce an affinity matrix derived from JS distance that is very similar to the affinity matrix generated by spectral clustering with the RBF kernel. Perhaps this demonstrates some mathematical connection between the two methodologies that arise in this particular circumstance but I'm not so sure at the moment.
 
 <iframe width="700" height="700" frameborder="0" scrolling="no" src="//plot.ly/~wiskojo/19.embed?link=false"></iframe>
 
@@ -201,7 +95,7 @@ Falling back on more conventional methods, we attempt to generate a clustering w
 ![png](https://raw.githubusercontent.com/wiskojo/wiskojo.github.io/master/resources/2018-04-02-visualizing-reddit-sentiments-with-emojis/output_52_0.png)
 
 #### Visualizing Networks of Subreddits with Strong Sentimental Connections
-Perhaps clusters don't tell the whole story; this thought urges us to pursue a different kind of visualization for our sentiment data that would perhaps help elucidate the difference in results and effectiveness between applying K-means and spectral clustering. With this in mind, we generate a network graph for our data with subreddits as nodes and edges connecting between subreddits whose JS distance is lower than a predefined threshold. Interestingly enough, we see that even within some very obvious, strongly coupled, subreddit clusters, that the subreddits within those clusters don't have sufficient affinity to be connected. We can then deduce that t-SNE succesfully localizes these clusters as neighbors in the embedding due to their relative similarity; i.e. subreddits that are highly sentimentally idiosyncratic and are clustered together are not necessarily very similar to one another, but they are just so far removed from every other subreddit that they are forced into being neighbors. This could explain why spectral clustering, which focuses prominently on connectivity strength, fails to appropriately find these clusters and why on the other hand K-means, which focuses on relative geometric proximity, excels.
+Perhaps clusters don't tell the whole story; this thought urges us to pursue a different kind of visualization for our sentiment data that would perhaps help elucidate the difference in results and effectiveness between applying K-means and spectral clustering. With this in mind, we generate a network graph for our data with subreddits as nodes and edges connecting between subreddits whose JS distance is lower than some predefined threshold. Interestingly enough, we see that even within some very obvious, strongly coupled, subreddit clusters, that the subreddits within those clusters don't have sufficient affinity to be connected. We can then perhaps deduce that t-SNE succesfully localizes these clusters as neighbors in the embedding due to their relative similarity; i.e. subreddits that are highly sentimentally idiosyncratic and are clustered together are not necessarily very similar to one another, but they are just so far removed from every other subreddit that they are forced into being neighbors. This could explain why spectral clustering, which focuses prominently on connectivity strength, fails to appropriately find these clusters and why on the other hand K-means, which focuses on relative geometric proximity, excels.
 
 <iframe width="700" height="410" frameborder="0" scrolling="no" src="//plot.ly/~wiskojo/11.embed?link=false"></iframe>
 
@@ -218,4 +112,4 @@ We've now examined various interesting aspects of our sentiment data, investigat
 
 ### Conclusions and Discussion
 ***
-By exploration of various analytical methods, we've been able to construct a map of Reddit that visually illustrates the internal diversity of its communal sentiments; we've shown that the very intriguing *DeepMoji* model can be utilized to assist us with this construction, and that in combination with the help of other powerful data analytic techniques, we were indeed able to successfully carry out a playful, yet in many ways imperfect, study that combines two amusing and somewhat quirky aspects of modern culture, *Reddit and Emojis*. You can check the project out on [Github](https://github.com/wiskojo/Reddit-and-Emojis), any kind of feedback is very much welcomed.
+By exploration of various analytical methods, we've been able to construct a map of Reddit that visually illustrates the internal diversity of its communal sentiments; we've shown that the very intriguing *DeepMoji* model can be utilized to assist us with this construction, and that in combination with the help of other powerful data analytic techniques, we were indeed able to successfully carry out a playful, yet in many ways imperfect, study that combines two amusing and somewhat quirky aspects of modern culture, *Reddit and Emojis*. Thanks for reading my first blog post. You can check the project out on [Github](https://github.com/wiskojo/Reddit-and-Emojis) if you're interested and any kind of feedback is valuable and very much welcomed.
