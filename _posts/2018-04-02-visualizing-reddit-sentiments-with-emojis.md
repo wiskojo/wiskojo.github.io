@@ -28,6 +28,134 @@ If you want more details on the technical aspects of the model, feel free to che
 ### Our Data
 For our dataset we will be using a small portion of the enormous [Reddit comments dataset](https://www.reddit.com/r/datasets/comments/65o7py/updated_reddit_comment_dataset_as_torrents/), specifically that of the month of March 2017. From within this data subset, we are only interested in comments that come from the top 125 or so subreddits (give and take a handful of extra subreddits that I threw in the mix just for the sake of fun and personal curiosity). Likewise, it is important to note also that we are only sampling from comments that fullfill certain criterias. For example, comments that have been removed or comments of deleted users are not considered. Comments with links and/or subreddit references will not be well understood by our sentiment model due to its lack of contextual information and are exempt from the study as well. Comments with special formatting and such are "sanitized" before they are analyzed and finally, due to architectural and computational constraints, we also choose to remove any comments with character count greater than 300 or less than 10. Note that there is certainly still a *lot* more that we can do with this in terms of preprocessing but we will choose to go with this simple solution for now as to not complicate our study. With this set of comments data ready (totalling around 3-4 million comments), we let the *DeepMoji* model do its thing and give us sentiment predictions, in the form of emojis, for each comment observation. With that all set and done, we are now ready to move on to bigger and better things. 
 
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>body</th>
+      <th>subreddit</th>
+      <th>score</th>
+      <th>controversiality</th>
+      <th>emoji</th>
+      <th>prob</th>
+      <th>emoji_sub</th>
+      <th>prob_sub</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>No more than two shots of vodka, and two glass...</td>
+      <td>AskReddit</td>
+      <td>1</td>
+      <td>0</td>
+      <td>39</td>
+      <td>0.276799</td>
+      <td>56</td>
+      <td>0.173834</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>Counterpoint: it might not be a better choice ...</td>
+      <td>nfl</td>
+      <td>1</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0.042279</td>
+      <td>40</td>
+      <td>0.038080</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>For today.Next week we could be making the pap...</td>
+      <td>politics</td>
+      <td>1</td>
+      <td>0</td>
+      <td>19</td>
+      <td>0.063925</td>
+      <td>32</td>
+      <td>0.054500</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>Some people like the SEALs that got killed, I ...</td>
+      <td>politics</td>
+      <td>2</td>
+      <td>0</td>
+      <td>42</td>
+      <td>0.105757</td>
+      <td>11</td>
+      <td>0.057937</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>No it wouldn't. Just let trans people use the ...</td>
+      <td>AskReddit</td>
+      <td>2</td>
+      <td>0</td>
+      <td>55</td>
+      <td>0.079227</td>
+      <td>32</td>
+      <td>0.079018</td>
+    </tr>
+    <tr>
+      <th>5</th>
+      <td>this fucking sucks big balls, terrible matchup...</td>
+      <td>MMA</td>
+      <td>1</td>
+      <td>0</td>
+      <td>32</td>
+      <td>0.351832</td>
+      <td>55</td>
+      <td>0.198105</td>
+    </tr>
+    <tr>
+      <th>6</th>
+      <td>I'd watch some anime.  It's illegal to pirate ...</td>
+      <td>AskReddit</td>
+      <td>2</td>
+      <td>0</td>
+      <td>51</td>
+      <td>0.076171</td>
+      <td>25</td>
+      <td>0.037710</td>
+    </tr>
+    <tr>
+      <th>7</th>
+      <td>As I myself am not upset, I can only assume yo...</td>
+      <td>pics</td>
+      <td>2</td>
+      <td>0</td>
+      <td>63</td>
+      <td>0.054844</td>
+      <td>22</td>
+      <td>0.035408</td>
+    </tr>
+    <tr>
+      <th>8</th>
+      <td>Correct. C# requires garbage collection suppor...</td>
+      <td>programming</td>
+      <td>47</td>
+      <td>0</td>
+      <td>22</td>
+      <td>0.063437</td>
+      <td>32</td>
+      <td>0.059092</td>
+    </tr>
+    <tr>
+      <th>9</th>
+      <td>Jon Jones really wanted to keep his nipples in...</td>
+      <td>MMA</td>
+      <td>5</td>
+      <td>0</td>
+      <td>12</td>
+      <td>0.089392</td>
+      <td>51</td>
+      <td>0.075123</td>
+    </tr>
+  </tbody>
+</table>
+
 ### Data Visualization
 ***
 At this point, we can already do some preliminary data visualization to get a sense of how redditors (a nickname for Reddit users) express themselves on Reddit. For example, we may be interested in which emojis are most commonly predicted by our DeepMoji model for comments from across all the relevant subreddits. From the chart below we can see that many people on Reddit, judging from the emotional contents of their posts, feel 😕 👍🏼 😳 and 😡.
