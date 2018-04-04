@@ -38,8 +38,6 @@ For our dataset we will be using a small portion of the enormous [Reddit comment
       <th>controversiality</th>
       <th>emoji</th>
       <th>prob</th>
-      <th>emoji_sub</th>
-      <th>prob_sub</th>
     </tr>
   </thead>
   <tbody>
@@ -51,8 +49,6 @@ For our dataset we will be using a small portion of the enormous [Reddit comment
       <td>0</td>
       <td>39</td>
       <td>0.276799</td>
-      <td>56</td>
-      <td>0.173834</td>
     </tr>
     <tr>
       <th>1</th>
@@ -62,8 +58,6 @@ For our dataset we will be using a small portion of the enormous [Reddit comment
       <td>0</td>
       <td>0</td>
       <td>0.042279</td>
-      <td>40</td>
-      <td>0.038080</td>
     </tr>
     <tr>
       <th>2</th>
@@ -73,8 +67,6 @@ For our dataset we will be using a small portion of the enormous [Reddit comment
       <td>0</td>
       <td>19</td>
       <td>0.063925</td>
-      <td>32</td>
-      <td>0.054500</td>
     </tr>
     <tr>
       <th>3</th>
@@ -84,8 +76,6 @@ For our dataset we will be using a small portion of the enormous [Reddit comment
       <td>0</td>
       <td>42</td>
       <td>0.105757</td>
-      <td>11</td>
-      <td>0.057937</td>
     </tr>
     <tr>
       <th>4</th>
@@ -95,8 +85,6 @@ For our dataset we will be using a small portion of the enormous [Reddit comment
       <td>0</td>
       <td>55</td>
       <td>0.079227</td>
-      <td>32</td>
-      <td>0.079018</td>
     </tr>
     <tr>
       <th>5</th>
@@ -106,8 +94,6 @@ For our dataset we will be using a small portion of the enormous [Reddit comment
       <td>0</td>
       <td>32</td>
       <td>0.351832</td>
-      <td>55</td>
-      <td>0.198105</td>
     </tr>
     <tr>
       <th>6</th>
@@ -117,8 +103,6 @@ For our dataset we will be using a small portion of the enormous [Reddit comment
       <td>0</td>
       <td>51</td>
       <td>0.076171</td>
-      <td>25</td>
-      <td>0.037710</td>
     </tr>
     <tr>
       <th>7</th>
@@ -128,8 +112,6 @@ For our dataset we will be using a small portion of the enormous [Reddit comment
       <td>0</td>
       <td>63</td>
       <td>0.054844</td>
-      <td>22</td>
-      <td>0.035408</td>
     </tr>
     <tr>
       <th>8</th>
@@ -139,8 +121,6 @@ For our dataset we will be using a small portion of the enormous [Reddit comment
       <td>0</td>
       <td>22</td>
       <td>0.063437</td>
-      <td>32</td>
-      <td>0.059092</td>
     </tr>
     <tr>
       <th>9</th>
@@ -150,8 +130,6 @@ For our dataset we will be using a small portion of the enormous [Reddit comment
       <td>0</td>
       <td>12</td>
       <td>0.089392</td>
-      <td>51</td>
-      <td>0.075123</td>
     </tr>
   </tbody>
 </table>
