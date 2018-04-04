@@ -1,5 +1,7 @@
 ---
 title: "Visualizing Reddit Sentiments with Emojis"
+description: "An attempt at building a map of Reddit sentiments"
+author: "Wis Kojohnjaratkul"
 comments: true
 ---
 
