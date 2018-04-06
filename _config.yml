@@ -39,7 +39,7 @@ defaults:
     values:
       layout:       "post"
 
-gems:
+plugins:
   - jekyll-seo-tag
   
 # Disqus Comments
