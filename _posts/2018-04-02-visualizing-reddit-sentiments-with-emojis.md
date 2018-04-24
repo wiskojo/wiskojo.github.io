@@ -8,7 +8,7 @@ comments: true
 <style>
   .chart-container {
     position: relative;
-    padding-bottom: 0;
+    padding-bottom: 100%;
     padding-top: 0;
     height: 0;
     overflow: hidden;
